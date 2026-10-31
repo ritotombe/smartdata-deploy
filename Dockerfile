@@ -37,6 +37,7 @@ export SESSION_DRIVER=${SESSION_DRIVER:-file}\n\
 export CACHE_DRIVER=${CACHE_DRIVER:-file}\n\
 php artisan storage:link --force 2>/dev/null || true\n\
 php artisan migrate --force\n\
+(while true; do sleep 600; curl -sS --max-time 10 https://smartdata-website.onrender.com/ >/dev/null 2>&1 || true; done) &\n\
 exec php -S 0.0.0.0:${PORT:-8000} -t public\n' > /usr/local/bin/start-container.sh && chmod +x /usr/local/bin/start-container.sh
 
 EXPOSE 8000
